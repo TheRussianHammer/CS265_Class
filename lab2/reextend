@@ -1,0 +1,16 @@
+#!/bin/bash
+if (( $# > 2 || $# < 2)) ; then
+	echo "$0 accepts 2 arguments"
+	exit
+fi
+if [[ "" == $(find . -name "*$1") ]] ; then
+	echo "no files found with $1 extension"
+	exit
+fi
+for file in *$1 ; do
+	# String manipulation of file name
+	# 1. Up to point of original extension
+	# 2. Concatenated with new extension
+	mv $file ${file:0:${#file}-${#1}}$2
+done
+echo "Done!"

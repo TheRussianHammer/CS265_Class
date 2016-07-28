@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+		<file>dir.xml</file>
+		<file>file.aa</file>
+		<file>file.bb</file>
+		<file>file.cc</file>
+	</other>
+</direntry>
+

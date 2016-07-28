@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ ! -d "testDir" ]; then
+	echo "dir made"
+fi
+mp3=".mp3"
+#find . -iname "*$mp3" | while read f
+#do
+#	echo "$f"
+#done
+#for i in *mp3
+#do
+#	echo "$i"
+#done
+#var=`ls -1 | head -1`
+#echo "$var"
+for file in *.mp3 ; do
+	v=$file
+	v=${v#*- }
+   echo "$v"
+done

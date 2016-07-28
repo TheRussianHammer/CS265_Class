@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+		<file>breadIsDangerous.txt</file>
+		<file>count.bash</file>
+		<file>er</file>
+		<dir>music</dir>
+		<file>Questions</file>
+		<file>reerer</file>
+		<file>reextend</file>
+		<file>spellExample.bak</file>
+		<file>spellExample.bak.bak</file>
+		<file>testBash</file>
+		<dir>testDir</dir>
+		<file>testThat</file>
+		<file>testThis</file>
+	</other>
+</direntry>
+

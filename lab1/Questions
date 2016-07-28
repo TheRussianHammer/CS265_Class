@@ -1,0 +1,81 @@
+Q1:
+.bashrc - invoked when the interactive shell starts up, and determines behavior
+.bash_profile - invoked on the login shell, and determines behavior
+
+Q2: 
+See external file 'vim_lab'
+
+Q3:
+-rw-rw-r-- 1 avk42 avk42 8059 Sep 23 14:13 funny
+-rwxrwxr-x 1 avk42 avk42  240 Sep 23 14:14 hello.bash
+-rw-rw-r-- 1 avk42 avk42  194 Sep 23 14:13 Questions.txt
+-rw-rw-r-- 1 avk42 avk42   25 Sep 23 13:52 vi_lab
+
+Q4:
+This will give read and write permissions to myself, and read to all other
+users
+
+Q5:
+Gives me all file privledges, and read and execute for all other users
+
+Q6:
+Yes
+
+Q7:
+Yes
+
+Q8:
+No
+
+Q9:
+'chmod 755' and 'chmod 600'
+
+Q10:
+Write permission denied, asked to override
+
+Q11:
+	ls * : Listed all non hidden files and directories.
+
+	ls a*: Listed all non hidden files and directories that started with the
+	letter 'a'
+
+	ls *m*: Listed all non hidden files and directories that included the letter
+	'm'
+
+	ls anno?: Listed the file 'annoy'
+
+	ls annoy?: Failed
+
+Q12:
+Opened to a new file name "a"
+
+Q13:
+	echo Is a < b?: No such file or directory
+	echo "Is a < b?": Is a < b?
+	echo "\$USER is $USER": $USER is avk42
+	echo '\$USER is $USER': \$USER is $USER
+	echo "Today is `date`": Today is Sun Sep 27 00:27:20 EDT 2015
+	echo "Today is $(date)": Today is Sun Sep 27 00:27:45 EDT 2015
+	echo 'Today is `date`': Today is `date`
+	echo -e "Files that start w/e:\n`ls e*`": ls: cannot access e*: No such file or directory Files that start w/e:
+
+Q14:
+"sort -n" sorts each row by numeric value, while "sort" sorty each row in
+alphebetic order
+
+Q15:
+sort -nr itemList-2cols | head -8
+
+Q16:
+lab1.tar.gzip
+
+Q17:
+The .tgz file was converted into a .tar
+
+Q18:
+grep -r Vacation
+
+Q19:
+find ~ -name "lab1*"
+
+

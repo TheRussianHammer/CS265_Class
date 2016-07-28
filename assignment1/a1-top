@@ -1,0 +1,83 @@
+#!/bin/bash
+function generateXML {
+
+	local xml='<?xml version="1.0" encoding="ISO-8859-1"?>'$'\n'	
+	xml="$xml<direntry>"	
+
+	local index=""
+	local required=()
+	local other=()
+
+	local openFE="<file>"
+	local closeFE="</file>"
+	local openDE="<dir>"
+	local closeDE="</dir>"
+	
+	other+=(*) # populate other with all files
+
+	if [ -e README ]; then
+		index=`awk "/index/" README | cut -f 2- -d":"`
+		export IFS=":" # nifty way of setting iterator delimeter
+		local hold=`awk "/required/" README | cut -f 2- -d":"`
+		for req in $hold; do
+			required+=($req)
+		done
+	fi		
+
+	# build xml string with index
+	# remove index file from other array
+	xml="$xml"$'\n'$'\t'"<index>"
+	if [[ ${#index} > 0 ]] ; then
+		xml="$xml"$'\n'$'\t\t'"$openFE$index$closeFE" 
+		other=( "${other[@]/$index}" )
+	fi
+	xml="$xml"$'\n'$'\t'"</index>"
+	
+	# build xml string with required files
+	# remove required files from other array
+	xml="$xml"$'\n'$'\t'"<required>"$'\n'
+	for i in "${required[@]}" ; do
+		xml="$xml"$'\t\t'"$openFE$i$closeFE"$'\n'
+		other=( "${other[@]/$i}" )
+	done	
+	xml="$xml"$'\t'"</required>"$'\n'
+
+	# build xml string with other files
+	xml="$xml"$'\t'"<other>"$'\n'
+	for i in "${other[@]}" ; do
+		if [ -d $i ] ; then
+			xml="$xml"$'\t\t'"$openDE$i$closeDE"$'\n'
+		else 
+			xml="$xml"$'\t\t'"$openFE$i$closeFE"$'\n'
+		fi
+	done
+	xml="$xml"$'\t'"</other>"$'\n'"</direntry>"$'\n'
+
+	echo "$xml" > dir.xml	
+}
+
+if [ $# -gt 1 ] ; then
+	echo 'This script accepts either 0(zero) or 1(one) args'
+	exit 1
+fi
+
+if [ $# -lt 1 ] ; then
+	dir=`pwd`
+else
+	dir="$1"
+	if ! cd "$dir" ; then
+		echo "$dir not found!"
+		exit 1
+	else 
+		dir=`pwd`
+	fi
+fi
+
+subDirs=(`find . -type d`)
+
+for i in "${subDirs[@]}" ; do
+	cd $i
+	generateXML
+	cd $dir 
+done
+echo "Done!"

@@ -1,0 +1,49 @@
+Q1:
+Prints out a list of files that have been modified within the given time
+range... In this case 2 hours.
+
+Q2:
+find . -type f -name "*.bash" -print
+
+Q3:
+When run under my home directory, the ouput consists of the relative path to
+all files that end in .bash from my home directory
+
+./CS265/lab1/hello.bash
+./tmp/gotMe.bash
+
+Q4:
+	characters = 2538
+	words = 421
+	lines = 73
+
+Q5:
+grep the breadIsDangerous.txt | wc -l
+
+Q6:
+A new file is created with the spell checked text
+
+Q7:
+When the two files are diffed there are several things consisting of the
+output. For each line difference; first the range of line numbers that
+differ are printed out using a format of "a1,a2cb1,b2", where "a1,a2"
+represents the line number range in the first file, and "b1,b2" represents
+the line number range of the second file. It follows this format only if
+there are consecutive line changes, otherwise "a1cb1" is printed where "a1"
+represents a line number in the first file, and "b1" represents a line
+number in the second file. Next, all of the lines within the first files
+line range are printed out, followed by a seperator and all of second files
+line within the line range. This pattern is repeated for all differences
+between both files. 
+
+Q8:
+No output 
+
+Q9:
+	0 - True
+	1 - False
+	2 - error
+If the string argument is found in the searched file, 0 (True) returns.
+If the string argument is not found in the searched file, 1 (False) returns.
+If the file cannot be found or any other error occurs, 2 (error) retruns.
+

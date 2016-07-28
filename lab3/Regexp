@@ -1,0 +1,34 @@
+Q1:
+egrep 'the' bright_side_of_life
+
+Q2:
+egrep '\bthe\b' bright_side_of_life
+
+Q3:
+grep -e '\bJust\b' bright_side_of_life
+
+Q4:
+grep -e 'just\|Just' bright_side_of_life
+
+Q5:
+grep -e '^\bjust\b\|^\bJust\b' bright_side_of_life
+
+Q6:
+grep -e '^\bmad\b\|^\bbad\b' bright_side_of_life
+
+Q7:
+grep -e '^\bdeath\b\|^\bbreath\b' bright_side_of_life
+
+Q8:
+grep -e "you[!.?]*$" bright_side_of_life
+
+Q9:
+grep -e "^\s" bright_side_of_life
+
+Q10:
+grep -e "^$" bright_side_of_life
+
+Q11:
+grep -e "^$" bright_side_of_life -c
+10
+

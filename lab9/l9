@@ -1,0 +1,30 @@
+Q1:
+There was a seg fault. A new file called "core" was generated.
+
+Q2:
+The program failed in the the "inTable" function, which is called in "main"
+which causes "main" to fail as well.
+
+Q3:
+	a) There was a bug on line 7. Changing scanf( "%d", n ) to scan( "%d", &n)
+
+	b) The bug is rather apparent when running, as values "Pi" and "n" are
+		flip-flopped. Changing printf("Pi=%d, n=%f\n", pi, n); to
+		printf("Pi=%f, n=%d\n", pi, n); should fix it.
+
+	c)The problem exists within the while loop, where the array "st" is
+		never indexed at zero. The solution would be to increment "numLines"
+		after indexing the array instead of before.
+
+	d) There is a seg fault when scanning for user input. This is fixed by
+		replacing the sceond paramter in the scanf function with the integer "n"
+		adress "&n". 
+	e)The error lies in the quicksort. The problem is that the pivot is not
+		moved to the first position in quicksortBug like it is in quicksort. This
+		is solve with swap(v,0,rand() % n); before the for loop, and an
+		assertion of assert((last >= 0) && (last< n)).
+Q4:
+The compiler cannot catch it as the icmp function is passed in by reference. 
+
+Q5:
+Segmentation fault

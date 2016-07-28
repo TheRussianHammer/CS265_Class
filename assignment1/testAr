@@ -1,0 +1,17 @@
+#!/bin/bash
+function test {
+
+	echo "test fn"
+
+}	
+ds=('a' 'b')
+ds+=('c')
+for i in "${ds[@]}"; do
+	echo "$i"
+done
+x="a"$'\n'"b"
+echo "$x"
+as=`pwd`
+cd "$1"
+mkdir testCD
+echo test 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+		<dir>assignment1</dir>
+		<file>dir.xml</file>
+		<dir>lab1</dir>
+		<dir>lab2</dir>
+		<dir>lab3</dir>
+		<dir>lab4</dir>
+	</other>
+</direntry>
+

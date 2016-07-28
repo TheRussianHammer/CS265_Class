@@ -1,0 +1,255 @@
+#!/usr/bin/python
+
+import sys
+
+userFunctions = ["init", "purchase", "change", "report"]
+denominations = [1, 5, 10, 20]
+maxChangeArgs = 11
+maxInitArgs = 8
+maxPurchaseArgs = 8
+maxReportArgs = 2
+register = []
+sales = 0
+
+def prettyArray( l ):
+	result = ""
+	for i in l:
+		result += str( i ) + " "
+	return result
+
+def totalCash( cash ):
+	result = 0
+	for i in range( len( cash ) ):
+		result += cash[i] * denominations[i]
+	return result
+
+def writeToFile():
+	global register
+	global sales
+	newFile = ""
+
+	with open( "CashRegister.avk42", "w" ) as f:
+		for i in register:
+			newFile += str( i ) + "\n"
+		newFile += str( sales )
+		f.write( newFile )
+
+def getRegister():
+	result = []
+	try:
+		with open( "CashRegister.avk42" ) as f:
+			count = 0
+			for i in f:
+				count += 1
+				if count <= len ( denominations ):
+					result.append( int( i ) )
+				else:
+					break
+		return result
+	except IOError:
+		sys.exit( 4 )
+
+def getSales():
+	result = 0
+	try:
+		with open( "CashRegister.avk42" ) as f:
+			count = 0
+			for i in f:
+				if count == len( denominations ) :
+					result = int( i )
+				count += 1
+		return result
+	except IOError:
+		sys.exit( 4 )
+
+def addToReg( n ):
+	global register
+	for i in range( len( n ) ):
+		register[i] += n[i]
+
+def subFromReg( n ):
+	global register
+	for i in range( len( n ) ):
+		register[i] -= n[i]
+
+def purchaseChange( purchase, denoms ):
+	global register
+	cash = totalCash( denoms ) 
+	regCash = totalCash( register ) 
+	dLen = len ( denominations )
+
+	if cash > regCash:
+		sys.exit( 3 )
+	
+	change = cash - purchase
+
+	if change < 0:
+		sys.exit( 2 )
+	elif change == 0:
+		return [0]*4
+	
+	changeDenoms = [0]* dLen
+
+	for i in range( dLen ):
+		if register[dLen - 1 - i] > 0:
+			hold = change // denominations[dLen - 1 - i]
+			if hold > register[dLen - 1 - i]:
+				hold -= hold - register[dLen - 1 - i]
+			changeDenoms[dLen - 1 - i] = hold 
+			change -= hold * denominations[dLen - 1 - i]
+
+	if change != 0:
+		sys.exit( 3 )
+	
+	return changeDenoms
+
+def validInitArgs( args ):
+	result = [0]*4
+
+	if len( args ) > maxInitArgs:
+		sys.exit( 1 )
+	
+	amount = 0
+	try:
+		amount = int( args[2] )
+	except ValueError:
+		sys.exit( 1 )
+
+	if args[3] != "=":
+		sys.exit( 1 )
+	if amount < 0:
+		sys.exit( 1 )
+	
+	for i in range( len ( args[4:] ) ):
+		try:
+			result[i] = int( args[4+i] )
+			if result[i] < 0:
+				sys.exit( 1 )
+		except ValueError:
+			sys.exit( 1 )
+
+	if amount != totalCash( result ):
+		sys.exit( 2 )
+
+	return result
+
+def validPurchaseArgs( args ):
+	if len( args ) > maxPurchaseArgs or len( args ) < 5:
+		sys.exit( 1 )
+	
+	cost = 0
+	count = 0
+	money = []
+	try:
+		cost = int(args[2])
+	except ValueError:
+		sys.exit( 1 )
+	
+	if args[3] != "=":
+		sys.exit( 1 )
+	if cost < 0:
+		sys.exit( 1 )
+	
+	for i in args[4:]:
+		try:
+			val = int( i )
+			if val < 0:
+				sys.exit( 1 )
+			money.append( val )
+		except ValueError:
+			sys.exit( 1 )	
+
+	return [cost,money]	
+
+def validChangeArgs( args ):
+	if len( args ) < 5 or len( args ) > maxChangeArgs:
+		sys.exit( 1 )
+	if "=" not in args:
+		sys.exit( 1 )
+	
+	customerAmount = [0]*len( denominations )
+	for i in range( len( denominations ) ):
+		if args[2+i] == "=":
+			break	
+		try:
+			val = int( args[2+i] )
+			if val < 0:
+				sys.exit( 1 )
+			customerAmount[i] = val 
+		except ValueError:
+			sys.exit( 1 )
+
+	customerRequest = [0]*len( denominations )
+	for i in range( len( denominations ) ):
+		try:
+			val = int( args[args.index("=")+i+1] )
+			if val < 0:
+				sys.exit( 1 )
+			customerRequest[i] = val 
+		except ValueError:
+			sys.exit( 1 )
+		except IndexError:
+			break
+
+	if totalCash( customerAmount ) != totalCash( customerRequest ):
+		sys.exit( 2 )	
+
+	addToReg( customerAmount )
+	for i in range( len( customerRequest ) ) :
+		if register[i] < customerRequest[i]:
+			sys.exit( 3 )
+	subFromReg( customerRequest )
+
+	return customerRequest
+
+def parseArgs( args ):
+	if len(args) < 2:
+		sys.exit( 1 )
+	function = args[1]
+
+	if function in userFunctions:
+		global register
+		global sales
+
+		if function == userFunctions[3]:
+			if len( args ) > maxReportArgs:
+				sys.exit( 1 )
+			register = getRegister()
+			sales = getSales()
+			total = totalCash( register )
+			report = str( sales ) + " : " + str( total ) + " = " + \
+				prettyArray( register )
+			print report
+			sys.exit( 0 )
+		elif function == userFunctions[2]:
+			register = getRegister()
+			sales = getSales()
+			change = validChangeArgs( args )	
+			print prettyArray( change )
+			writeToFile()
+			sys.exit( 0 )
+		elif function == userFunctions[1]:
+			register = getRegister()
+			sales = getSales()
+			userInput = validPurchaseArgs( args )
+			cost = userInput[0]
+			sales += cost
+			userCash = userInput[1]
+			addToReg( userCash )
+			result = purchaseChange( cost, userCash )
+			subFromReg( result )
+			print prettyArray( result )
+			writeToFile()
+			sys.exit( 0 )
+		else:
+			register = validInitArgs( args )
+			writeToFile()
+			sys.exit( 0 )
+	else:
+		sys.exit( 1 )		
+
+def main():
+	args = sys.argv
+	parseArgs( args )
+
+main()

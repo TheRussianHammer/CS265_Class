@@ -1,0 +1,16 @@
+#!/bin/bash
+bandName=`ls -1 | head -1`
+bandName=${bandName% -*}
+
+if [ ! -d "${bandName}" ] ; then	  
+	mkdir ./"${bandName}"
+	echo "Made directory $bandName in current directory"
+fi
+
+for file in *.mp3 ; do
+	fileName=$file
+	fileName=${fileName#*- }
+	mv "$file" "./$bandName/$fileName"
+done
+
+echo "All files copied into '$bandName' directory"

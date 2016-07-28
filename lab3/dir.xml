@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+		<file>anagram</file>
+		<file>out</file>
+		<file>Regexp</file>
+		<file>sign</file>
+		<file>sign.c</file>
+		<file>squash</file>
+		<file>squash.awk</file>
+	</other>
+</direntry>
+

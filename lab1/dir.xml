@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+		<file>annoy</file>
+		<file>annoy.cc</file>
+		<file>funny</file>
+		<file>hello.bash</file>
+		<file>itemList</file>
+		<file>itemList-2cols</file>
+		<file>Questions</file>
+		<file>TelecomTruths</file>
+		<file>TEST</file>
+		<file>UnitTestingPhase</file>
+		<file>vi_lab</file>
+	</other>
+</direntry>
+

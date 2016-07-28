@@ -1,0 +1,160 @@
+#!/bin/bash
+
+# This is a bash script that tests assignmet 4
+# Each component is tested to incorporate each exit code
+# Author: Alexander Kazantsev 
+
+
+#first block is dedicated to testing the init component
+
+#test valid init
+python assn4 init 165 = 10 5 5 4 
+if [ $? -eq 0 ] ; then
+	echo 'valid init passed'
+else
+	echo 'valid init failed'
+fi
+
+#test not equal init
+python assn4 init 50 = 6 3 1 1
+if [ $? -eq 2 ] ; then
+	echo 'not equal init passed'
+else
+	echo 'not equal init failed'
+fi
+
+#test for bad args 1
+python assn4 init = 5 3 1 1
+if [ $? -eq 1 ] ; then
+	echo 'bad args 1 init passed'
+else
+	echo 'bad args 1 init failed'
+fi
+
+#test for bad args 2
+python assn4 init -50 = -5 -3 -1 -1
+if [ $? -eq 1 ] ; then
+	echo 'bad args 2 init passed'
+else
+	echo 'bad args 2 init failed'
+fi
+
+
+
+# This block is dedicated to testing the purchase component
+
+#test valid purchase 
+python assn4 purchase 50 = 0 0 1 2 
+if [ $? -eq 0 ] ; then
+	echo 'valid purchase passed'
+else
+	echo 'valid purchase failed'
+fi
+
+#test not enough money for purchase
+python assn4 purchase 50 = 3
+if [ $? -eq 2 ] ; then
+	echo 'not equal purchase passed'
+else
+	echo 'not equal purchase failed'
+fi
+
+#test bad args 1
+python assn4 purchase 50 = a 5 3
+if [ $? -eq 1 ] ; then
+	echo 'bad args 1 purchase passed'
+else
+	echo 'bad args 1 purchase failed'
+fi
+
+#test bad args 2 
+python assn4 purchase -50 = 0 -5 -3
+if [ $? -eq 1 ] ; then
+	echo 'bad args 2 purchase passed'
+else
+	echo 'bad args 2 purchase failed'
+fi
+
+#test insufficient funds
+python assn4 init 10 = 0 0 1
+python assn4 purchase 51 = 0 1 1 2 
+if [ $? -eq 3 ] ; then
+	echo 'insufficient funds purchase passed'
+else
+	echo 'insufficient funds purchase failed'
+fi
+
+
+#test file problems
+rm -rf "CashRegister.avk42"
+
+python assn4 purchase 50 = 0 0 1 2 
+if [ $? -eq 4 ] ; then
+	echo 'no file purchase passed'
+else
+	echo 'no file purchase failed'
+fi
+
+#test block dedicated to testing change component
+
+python assn4 init 165 = 10 5 5 4 
+
+#test valid change
+python assn4 change 5 = 0 1
+if [ $? -eq 0 ] ; then
+	echo 'valid change passed'
+else
+	echo 'valid change failed'
+fi
+
+#test unequal change
+python assn4 change 5 = 1 1
+if [ $? -eq 2 ] ; then
+	echo 'unequal change passed'
+else
+	echo 'unequal change failed'
+fi
+
+#test change bad args 1
+python assn4 change -5 = 0 -1
+if [ $? -eq 1 ] ; then
+	echo 'bad args 1 change passed'
+else
+	echo 'bad args 1 change failed'
+fi
+
+#test change bad args 2
+python assn4 change 5 1
+if [ $? -eq 1 ] ; then
+	echo 'bad args 2 change passed'
+else
+	echo 'bad args 2 change failed'
+fi
+
+#test block dedicated to testing the report component
+
+#test valid report
+python assn4 report 
+if [ $? -eq 0 ] ; then
+	echo 'valid report passed'
+else
+	echo 'valid report failed'
+fi
+
+#test invalid report with extra args
+python assn4 report 1 2
+if [ $? -eq 1 ] ; then
+	echo 'invalid report passed'
+else
+	echo 'invalid report failed'
+fi
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+Q1:
+The function "add" adds a new element to the "State" list, which contains an
+array of prefix strings and a suffix list, as well as
+updating the suffix list. The function "addSuffix" only adds a new element
+to the suffix list. 
+
+Q2:
+The "lookup" function accepts a string array with length "NPREF", and iterates
+through the "State" list at index "h" in the "statetab" array. If all the
+prefix' in the "State" element match with the prefix array argument then the
+state is returned. If a "State" is not returned and a the create flag is
+true then a new "State" element will be created with the same prefix array
+passed in, otherwise a NULL "State" is returned.
+
+Q3:
+
+PREFIX 	 		|		SUFFIX
+-----------------------------
+(null)(null)   |		 It's    
+(null) It's		|	 		a
+It's a			|		  new
+a new          |      dawn
+new dawn			|		(null)
+
+a)0
+b)1
+c)1
+d)1
+
+Q4:
+The advantage is that it's inexpensive to find an appropriate suffix, and
+the developer has control over implementation. 
+
+Q5:
+The developer needs to write more code comparatively to a higher level
+language.
+
+Q6:
+void clean()
+{
+	int i;
+	State *s, *q;
+	for (i = 0; i < NHASH ; ++i)
+	{
+		for(s = statetab[i] ; s != NULL ; s = q)
+		{
+			q = s->next;
+			free( s );
+		} 
+	}
+} 
+
+Q7:
+Yes. No real difficulties as this has been implemented in a previous lab to
+
+Q8:
+Each string is reached only once as each "State" element is only freed once.
+
+Q9:
+Prefixes are stored in a double ended queue. A vector allocates more memory
+than currently required to anticipate growth, but since the amount of
+strings is static there is no need for a vector.
+
+Q10:
+A map replaces the hash table.
+
+Q11:
+Suffices are stored in a vector inside the "statetab" map as the value. The
+prefix is the key.
+
+Q12:
+The program is much more readable and concise, as it requires less lines of
+code. Much easier to write as well.
+
+Q13:
+In general "C++" is slower than "C". 
+
+Q14:
+The prefixes are stored in varaiables "w1" and "w2", which are stored in a
+tuple called "key".
+
+Q15:
+The dictionary "Table" replaces the hash table.
+
+Q16:
+The suffices are stored in the dictionary "Table".
+
+Q17:
+Once again, much shorter comparatively to "C" and "C++" and reads almost
+like english.
+
+Q18:
+Since python is an interpreted language, it runs much slower than a compiled
+language like "C" and "C++".
+
+

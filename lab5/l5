@@ -1,0 +1,108 @@
+Q1:
+	List - A sequence of elements that are not indexible through constant
+			 time. All elements are connected through pointers.
+	Stack - Can be viewed as a pile of data, where the first element accesed
+			  was the last element added. This is also known as FILO (first in
+		     last out). 
+	Queue - Quite the opposite of a stack, where data is accesed through FIFO
+			  (first in first out). 
+	Map - Allows the programmer to associate satellite data with "key". 
+
+Q2:
+Using a binary search on a sorted will yield a result at most time
+O(log(n)). This is the case because, when using a binary search, the array
+size in cut in half with each iteration which makes the maximum amount of
+steps required log(n).
+
+Q3:
+Using a linear search on an array will yield a result at most time O(n). It
+is obvious why, but an example would be if the desired element is in the
+last indicy of the array, then the linear search would have to compare all
+of the elements in the array (n-1 elements) before the last indicy as well
+as the last indicy, which yeilds a time of O(n).
+
+Q4:
+If the array is very large, and the element is known to be near or at the
+beginning of the array. 
+
+Q5:
+	*84* 37 93 82 98 27 63 73 93 27 75 55 45 8
+	after partition function
+	8 37 82 27 63 73 27 75 55 45 *84* 93 98 93 - list passed to first 2
+	recursive calls
+
+	*8* 37 82 27 63 73 27 75 55 45 
+   *93* 98 93
+	after partition function
+	*8* 37 82 27 63 73 27 75 55 45 - one list passed to recursive calls
+	*93* 98 93 - another list passed to recursive calls
+
+	*37* 82 27 63 73 27 75 55 45	
+	*98* 93
+	after partion function
+	27 27 *37* 63 73 82 75 55 45 - passed to recursive calls
+	93 *98* - passed to recursive calls and ends
+
+	*27* 27
+	*63* 73 82 75 55 45
+	after partiton function
+	*27* 27 - passed to recursive calls and ends
+	45 55 *63* 75 73 82 - passed to recursive calls
+
+	*45* 55
+	*75* 73 82
+	after partition function
+	*45* 55 - passed to recursive calls and ends
+	73 *75* 82 - passed to recursive calls
+
+	*73*
+	*82*
+	end
+
+Q6:
+The first section of the main function builds a list that looks like
+["3","24","06"], where indicy 0 points to indicy 1, and indicy 1 points to
+indicy 2 and indicy 2 points to null. They are all of struct type "sNode"
+
+The While loop following the for loop deletes the list from memory.
+
+Q7:
+	
+[13, [28. [24. [3, None]]]] 
+
+Q8:
+The reason the value of "buffer" changes the first time "s" is modified is
+that "s" is originally assigned "buffer" address, and since "s" is a pointer
+any modifications to "s" modify "buffer". The second "attempt" copies the
+value of "buffer" into "s", but not the memory address.
+
+Q9:
+Since the hash function is poorly designed, all of the entries with keys
+from the keyList will not be present in the table. 
+The resulting table will only consist of the entries with the key values of
+"Vera", "Jesse", and "Cos"
+["Cos", "Vera","Jesse"]
+Although all of the keys for each entry are not in the table, they are still
+present in memory, since each entry contains a pointer to the
+previous entry in the same indicy. 
+
+Q10:
+int find ( char *key, int *p_ans ){
+	entry *p, *q;
+	int i;
+
+	for( i=0; i<TABLE_SIZE; ++i )
+	{
+		for( p=table[i]; p!=NULL; p=q )
+		{
+			if( strcmp( key, p->key ) == 0 )
+			{
+				int *temp = p_ans;
+				*temp = p->val;
+				return 1;		
+			}
+			q = p->next;
+		}
+	}
+	return 0;
+}

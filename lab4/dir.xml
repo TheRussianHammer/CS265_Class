@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+		<file>s1.py</file>
+		<file>s2.py</file>
+		<file>students</file>
+		<file>students.csv</file>
+	</other>
+</direntry>
+

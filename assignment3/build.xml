@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<project default='all'>
+
+	<target name='run' depends='comp'>
+		<java classname='PhoneDict'>
+			<classpath path='./'/>
+		</java>
+	</target>
+
+	<target name='comp'>
+		<javac srcdir='./' includes='PhoneDict.java' />
+	</target>
+
+	<target name='clean'>
+		<delete>
+			<fileset dir='./'>
+				<include name='*.class'/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name='all' depends='clean, run'/>
+
+</project>
